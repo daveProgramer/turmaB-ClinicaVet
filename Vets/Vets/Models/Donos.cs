@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -7,21 +9,31 @@ namespace Vets.Models
 {
     public class Donos
     {
-        public int DonosID{ get; set;}
+        //construtor da Classe, que vai incializar o atributo 'LisataDeAlimais'
+        // vai representar os dados da tabela dos DONOS
 
-        public int Nome { get; set;}
+            // criar o construtor desta classe
+            // e carregar a lista de Animais
+        public Donos()
+        {
+            ListaDeAnimais = new HashSet<Animais>();
+        }
 
-        public string NIF { get; set;}
 
-        public string codPost { get; set;}
+        [Key]//força a criação de uma PK
+        public int DonoID { get; set; }
 
-        public string Morada { get; set;}
+        [Required]
+        public string Nome { set; get; }
 
-        public double Altua { get; set;}
+        [Required]
+        public string NIF { get; set; }
 
-        public int Idade { get; set;}
-
+        // especificar que um DONO tem muitos ANIMAIS
+        public ICollection<Animais> ListaDeAnimais { get; set; }
 
 
     }
+
+
 }
