@@ -1,39 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace Vets.Models
-{
-    public class Donos
-    {
-        //construtor da Classe, que vai incializar o atributo 'LisataDeAlimais'
-        // vai representar os dados da tabela dos DONOS
+namespace Vets.Models {
+   public class Donos {
+      // vai representar os dados da tabela dos DONOS
 
-            // criar o construtor desta classe
-            // e carregar a lista de Animais
-        public Donos()
-        {
-            ListaDeAnimais = new HashSet<Animais>();
-        }
+      // criar o construtor desta classe
+      // e carregar a lista de Animais
+      public Donos() {
+         ListaDeAnimais = new HashSet<Animais>();
+      }
 
+      [Key]
+      public int DonoID { get; set; }
 
-        [Key]//força a criação de uma PK
-        public int DonoID { get; set; }
+      [Required]
+      public string Nome { set; get; }
 
-        [Required]
-        public string Nome { set; get; }
+      [Required]
+      public string NIF { get; set; }
 
-        [Required]
-        public string NIF { get; set; }
-
-        // especificar que um DONO tem muitos ANIMAIS
-        public ICollection<Animais> ListaDeAnimais { get; set; }
+      // especificar que um DONO tem muitos ANIMAIS
+      public ICollection<Animais> ListaDeAnimais { get; set; }
 
 
-    }
 
-
+   }
 }

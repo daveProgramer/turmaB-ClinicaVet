@@ -1,52 +1,57 @@
-namespace Vets.Migrations
-{
-    using Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+namespace Vets.Migrations {
+   using System;
+   using System.Collections.Generic;
+   using System.Data.Entity;
+   using System.Data.Entity.Migrations;
+   using System.Linq;
+   using Vets.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Vets.Models.VetsDB>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = true;
-        }
+   internal sealed class Configuration : DbMigrationsConfiguration<Vets.Models.VetsDB> {
+      public Configuration() {
+         AutomaticMigrationsEnabled = true;
+      }
 
-        protected override void Seed(Vets.Models.VetsDB context)
-        {
-            //  This method will be called after migrating to the latest version.
-  // adiciona DONOS
-   var donos = new List<Donos> {
-   new Donos  {DonoID=1, Nome = "Luís Freitas", NIF ="813635582" },
-   new Donos  {DonoID=2, Nome = "Andreia Gomes", NIF ="854613462" },
-   new Donos  {DonoID=3, Nome = "Cristina Sousa", NIF ="265368715" },
-   new Donos  {DonoID=4, Nome = "Sónia Rosa", NIF ="835623190" },
-   new Donos  {DonoID=5, Nome = "António Santos", NIF ="751512205" },
-   new Donos  {DonoID=6, Nome = "Gustavo Alves", NIF ="728663835" },
-   new Donos  {DonoID=7, Nome = "Rosa Vieira", NIF ="644388118" },
-   new Donos  {DonoID=8, Nome = "Daniel Dias", NIF ="262618487" },
-   new Donos  {DonoID=9, Nome = "Tânia Gomes", NIF ="842615197" },
-   new Donos  {DonoID=10, Nome = "Andreia Correia", NIF ="635139506" },
-   new Donos  {DonoID=11, Nome = "Márcio Alves", NIF ="715428372" },
-   new Donos  {DonoID=12, Nome = "Inês Martins", NIF ="348385836" },
-   new Donos  {DonoID=13, Nome = "Teresinha Vieira", NIF ="365555205" },
-   new Donos  {DonoID=14, Nome = "Marco Soares", NIF ="540161898" },
-   new Donos  {DonoID=15, Nome = "Lourdes Vieira", NIF ="528411261" },
-   new Donos  {DonoID=16, Nome = "Júlio Morais", NIF ="266563928" },
-   new Donos  {DonoID=17, Nome = "Carmem Oliveira", NIF ="717250604" },
-   new Donos  {DonoID=18, Nome = "Denise Silva", NIF ="843547587" },
-   new Donos  {DonoID=19, Nome = "Cristina Melo", NIF ="416933279" },
-   new Donos  {DonoID=20, Nome = "Augusto Rosa", NIF ="485162005" }
-};
+      protected override void Seed(Vets.Models.VetsDB context) {
+         //  This method will be called after migrating to the latest version.
 
-            donos.ForEach(dd => context.Donos.AddOrUpdate(d => d.Nome, dd));
-            context.SaveChanges();
+         //#############################################################
+         // criação das classes DONOS, VETERINARIOS, ANIMAIS e CONSULTAS
+         //#############################################################
 
-            // ############################################################################################
-            // adiciona ANIMAIS
-            var animais = new List<Animais> {
+         // Configuration --- SEED
+         //=============================================================
+
+         // ############################################################################################
+         // adiciona DONOS
+         var donos = new List<Donos> {
+            new Donos  {DonoID=1, Nome = "Luís Freitas", NIF ="813635582" },
+            new Donos  {DonoID=2, Nome = "Andreia Gomes", NIF ="854613462" },
+            new Donos  {DonoID=3, Nome = "Cristina Sousa", NIF ="265368715" },
+            new Donos  {DonoID=4, Nome = "Sónia Rosa", NIF ="835623190" },
+            new Donos  {DonoID=5, Nome = "António Santos", NIF ="751512205" },
+            new Donos  {DonoID=6, Nome = "Gustavo Alves", NIF ="728663835" },
+            new Donos  {DonoID=7, Nome = "Rosa Vieira", NIF ="644388118" },
+            new Donos  {DonoID=8, Nome = "Daniel Dias", NIF ="262618487" },
+            new Donos  {DonoID=9, Nome = "Tânia Gomes", NIF ="842615197" },
+            new Donos  {DonoID=10, Nome = "Andreia Correia", NIF ="635139506" },
+            new Donos  {DonoID=11, Nome = "Márcio Alves", NIF ="715428372" },
+            new Donos  {DonoID=12, Nome = "Inês Martins", NIF ="348385836" },
+            new Donos  {DonoID=13, Nome = "Teresinha Vieira", NIF ="365555205" },
+            new Donos  {DonoID=14, Nome = "Marco Soares", NIF ="540161898" },
+            new Donos  {DonoID=15, Nome = "Lourdes Vieira", NIF ="528411261" },
+            new Donos  {DonoID=16, Nome = "Júlio Morais", NIF ="266563928" },
+            new Donos  {DonoID=17, Nome = "Carmem Oliveira", NIF ="717250604" },
+            new Donos  {DonoID=18, Nome = "Denise Silva", NIF ="843547587" },
+            new Donos  {DonoID=19, Nome = "Cristina Melo", NIF ="416933279" },
+            new Donos  {DonoID=20, Nome = "Augusto Rosa", NIF ="485162005" }
+         };
+
+         donos.ForEach(dd => context.Donos.AddOrUpdate(d => d.Nome, dd));
+         context.SaveChanges();
+
+         // ############################################################################################
+         // adiciona ANIMAIS
+         var animais = new List<Animais> {
    new Animais  {AnimalID=1, Nome = "Bubi", Especie ="cão", Raca="Pastor Alemão", Peso=24, DonosFK=1},
    new Animais  {AnimalID=2, Nome = "Pastor", Especie ="cão", Raca="Serra Estrela", Peso=50, DonosFK=3},
    new Animais  {AnimalID=3, Nome = "Tripé", Especie ="cão", Raca="Serra Estrela", Peso=45, DonosFK=2},
@@ -77,26 +82,26 @@ namespace Vets.Migrations
 
 };
 
-            animais.ForEach(aa => context.Animais.AddOrUpdate(a => a.Nome, aa));
-            context.SaveChanges();
+         animais.ForEach(aa => context.Animais.AddOrUpdate(a => a.Nome, aa));
+         context.SaveChanges();
 
 
-            // ############################################################################################
-            // adiciona VETERINARIOS
-            var veterinarios = new List<Veterinarios> {
+         // ############################################################################################
+         // adiciona VETERINARIOS
+         var veterinarios = new List<Veterinarios> {
    new Veterinarios  {VeterinarioID=1, Nome = "Maria Pinto", NumCedulaProf ="vet-34589" },
    new Veterinarios  {VeterinarioID=2, Nome = "Luís Santos", NumCedulaProf ="vet-34590" },
    new Veterinarios  {VeterinarioID=3, Nome = "João  Pinto", NumCedulaProf ="vet-56732" },
    new Veterinarios  {VeterinarioID=4, Nome = "Paula Fernandes", NumCedulaProf ="vet-64327" }
 };
 
-            veterinarios.ForEach(vv => context.Veterinarios.AddOrUpdate(v => v.Nome, vv));
-            context.SaveChanges();
+         veterinarios.ForEach(vv => context.Veterinarios.AddOrUpdate(v => v.Nome, vv));
+         context.SaveChanges();
 
 
-            // ############################################################################################
-            // adiciona CONSULTAS
-            var consultas = new List<Consultas> {
+         // ############################################################################################
+         // adiciona CONSULTAS
+         var consultas = new List<Consultas> {
    new Consultas  {ConsultaID = 1, DataConsulta =  new DateTime(2015,2,8), VeterinarioFK = 1, AnimalFK = 2 },
    new Consultas  {ConsultaID = 2, DataConsulta =  new DateTime(2015,5,8), VeterinarioFK = 1, AnimalFK = 19 },
    new Consultas  {ConsultaID = 3, DataConsulta =  new DateTime(2015,6,8), VeterinarioFK = 1, AnimalFK = 13 },
@@ -199,9 +204,13 @@ namespace Vets.Migrations
    new Consultas  {ConsultaID = 100, DataConsulta =  new DateTime(2016,10,8), VeterinarioFK = 4, AnimalFK = 11 }
 };
 
-            consultas.ForEach(cc => context.Consultas.Add(cc));
-            context.SaveChanges();
+         consultas.ForEach(cc => context.Consultas.Add(cc));
+         context.SaveChanges();
 
-        }
-    }
+
+
+
+
+      }
+   }
 }
