@@ -1,30 +1,35 @@
-namespace Vets.Migrations {
-   using System;
-   using System.Collections.Generic;
-   using System.Data.Entity;
-   using System.Data.Entity.Migrations;
-   using System.Linq;
-   using Vets.Models;
+namespace ClinicaVeterinaria.Migrations
+{
+    using ClinicaVeterinaria.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
-   internal sealed class Configuration : DbMigrationsConfiguration<Vets.Models.VetsDB> {
-      public Configuration() {
-         AutomaticMigrationsEnabled = true;
-      }
+    internal sealed class Configuration : DbMigrationsConfiguration<ClinicaVeterinaria.Models.VetsDB>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = true;
+        }
 
-      protected override void Seed(Vets.Models.VetsDB context) {
-         //  This method will be called after migrating to the latest version.
+        protected override void Seed(ClinicaVeterinaria.Models.VetsDB context)
+        {
+            //  This method will be called after migrating to the latest version.
 
-         //#############################################################
-         // criação das classes DONOS, VETERINARIOS, ANIMAIS e CONSULTAS
-         //#############################################################
+            //#############################################################
+            // criação das classes DONOS, VETERINARIOS, ANIMAIS e CONSULTAS
+            //#############################################################
 
-         // Configuration --- SEED
-         //=============================================================
 
-         // ############################################################################################
-         // adiciona DONOS
-         var donos = new List<Donos> {
-            new Donos  {DonoID=1, Nome = "Luís Freitas", NIF ="813635582" },
+            // Configuration --- SEED
+            //=============================================================
+
+            // ############################################################################################
+            // adiciona DONOS
+            var donos = new List<Donos> {
+            new Donos  {DonoID=1, Nome = "Luís Gomes Freitas", NIF ="813635582" },
             new Donos  {DonoID=2, Nome = "Andreia Gomes", NIF ="854613462" },
             new Donos  {DonoID=3, Nome = "Cristina Sousa", NIF ="265368715" },
             new Donos  {DonoID=4, Nome = "Sónia Rosa", NIF ="835623190" },
@@ -46,62 +51,62 @@ namespace Vets.Migrations {
             new Donos  {DonoID=20, Nome = "Augusto Rosa", NIF ="485162005" }
          };
 
-         donos.ForEach(dd => context.Donos.AddOrUpdate(d => d.Nome, dd));
-         context.SaveChanges();
+            donos.ForEach(dd => context.Donos.AddOrUpdate(d => d.NIF, dd));
+            context.SaveChanges(); // commit
 
-         // ############################################################################################
-         // adiciona ANIMAIS
-         var animais = new List<Animais> {
-   new Animais  {AnimalID=1, Nome = "Bubi", Especie ="cão", Raca="Pastor Alemão", Peso=24, DonosFK=1},
-   new Animais  {AnimalID=2, Nome = "Pastor", Especie ="cão", Raca="Serra Estrela", Peso=50, DonosFK=3},
-   new Animais  {AnimalID=3, Nome = "Tripé", Especie ="cão", Raca="Serra Estrela", Peso=45, DonosFK=2},
-   new Animais  {AnimalID=4, Nome = "Kika", Especie ="cão", Raca="Serra Estrela", Peso=39, DonosFK=5},
-   new Animais  {AnimalID=5, Nome = "Traquina", Especie ="cão", Raca="Serra Estrela", Peso=55, DonosFK=6},
-   new Animais  {AnimalID=6, Nome = "Rufia", Especie ="cão", Raca="Serra Estrela", Peso=45, DonosFK=9},
-   new Animais  {AnimalID=7, Nome = "Morde Tudo", Especie ="cão", Raca="Dobreman", Peso=39, DonosFK=10},
-   new Animais  {AnimalID=8, Nome = "Forte", Especie ="cão", Raca="Rotweiler", Peso=20, DonosFK=7},
-   new Animais  {AnimalID=9, Nome = "Mau", Especie ="cão", Raca="Rotweiler", Peso=38, DonosFK=8},
-   new Animais  {AnimalID=10, Nome = "Saltitão", Especie ="cão", Raca="Rotweiler", Peso=36, DonosFK=1},
-   new Animais  {AnimalID=11, Nome = "Amigo", Especie ="cão", Raca="Labrador", Peso=24, DonosFK=1},
-   new Animais  {AnimalID=12, Nome = "Pintas", Especie ="cão", Raca="Labrador", Peso=6, DonosFK=8},
-   new Animais  {AnimalID=13, Nome = "Babado", Especie ="cão", Raca="Labrador", Peso=45, DonosFK=11},
-   new Animais  {AnimalID=14, Nome = "Bebé", Especie ="cão", Raca="Labrador", Peso=35, DonosFK=12},
-   new Animais  {AnimalID=15, Nome = "Bernardo", Especie ="cão", Raca="São Bernardo", Peso=67, DonosFK=15},
-   new Animais  {AnimalID=16, Nome = "Miau", Especie ="gato", Raca="siamês", Peso=2, DonosFK=16},
-   new Animais  {AnimalID=17, Nome = "Tareco", Especie ="gato", Raca="siamês", Peso=1, DonosFK=17},
-   new Animais  {AnimalID=18, Nome = "Fofo", Especie ="gato", Raca="persa", Peso=10, DonosFK=17},
-   new Animais  {AnimalID=19, Nome = "Pantufa", Especie ="gato", Raca="persa", Peso=1, DonosFK=18},
-   new Animais  {AnimalID=20, Nome = "Vadio", Especie ="gato", Raca="rafeiro", Peso=2, DonosFK=19},
-   new Animais  {AnimalID=21, Nome = "Saltador", Especie ="Cavalo", Raca="Lusitana", Peso=780, DonosFK=20},
-   new Animais  {AnimalID=22, Nome = "Crina Branca", Especie ="Cavalo", Raca="Lusitana", Peso=900, DonosFK=13},
-   new Animais  {AnimalID=23, Nome = "Brincalhão", Especie ="Cavalo", Raca="Lusitana", Peso=458, DonosFK=12},
-   new Animais  {AnimalID=24, Nome = "Malhada", Especie ="Vaca", Raca="Charolesa", Peso=452, DonosFK=13},
-   new Animais  {AnimalID=25, Nome = "Coxa", Especie ="Vaca", Raca="Charolesa", Peso=562, DonosFK=13},
-   new Animais  {AnimalID=26, Nome = "Tansa", Especie ="Vaca", Raca="Charolesa", Peso=284, DonosFK=14},
-   new Animais  {AnimalID=27, Nome = "Salta Pocinha", Especie ="Cavalo", Raca="Lusitana", Peso=793, DonosFK=4}
+            // ############################################################################################
+            // adiciona ANIMAIS
+            var animais = new List<Animais> {
+            new Animais  {AnimalID=1, Nome = "Bubi", Especie ="cão", Raca="Pastor Alemão", Peso=24, DonosFK=1},
+            new Animais  {AnimalID=2, Nome = "Pastor", Especie ="cão", Raca="Serra Estrela", Peso=50, DonosFK=3},
+            new Animais  {AnimalID=3, Nome = "Tripé", Especie ="cão", Raca="Serra Estrela", Peso=45, DonosFK=2},
+            new Animais  {AnimalID=4, Nome = "Kika", Especie ="cão", Raca="Serra Estrela", Peso=39, DonosFK=5},
+            new Animais  {AnimalID=5, Nome = "Traquina", Especie ="cão", Raca="Serra Estrela", Peso=55, DonosFK=6},
+            new Animais  {AnimalID=6, Nome = "Rufia", Especie ="cão", Raca="Serra E, DonosFK=1strela", Peso=45, DonosFK=9},
+            new Animais  {AnimalID=7, Nome = "Morde Tudo", Especie ="cão", Raca="Dobreman", Peso=39, DonosFK=10},
+            new Animais  {AnimalID=8, Nome = "Forte", Especie ="cão", Raca="Rotweiler", Peso=20, DonosFK=7},
+            new Animais  {AnimalID=9, Nome = "Mau", Especie ="cão", Raca="Rotweiler", Peso=38, DonosFK=8},
+            new Animais  {AnimalID=10, Nome = "Saltitão", Especie ="cão", Raca="Rotweiler", Peso=36, DonosFK=1},
+            new Animais  {AnimalID=11, Nome = "Amigo", Especie ="cão", Raca="Labrador", Peso=24, DonosFK=1},
+            new Animais  {AnimalID=12, Nome = "Pintas", Especie ="cão", Raca="Labrador", Peso=6, DonosFK=8},
+            new Animais  {AnimalID=13, Nome = "Babado", Especie ="cão", Raca="Labrador", Peso=45, DonosFK=11},
+            new Animais  {AnimalID=14, Nome = "Bebé", Especie ="cão", Raca="Labrador", Peso=35, DonosFK=12},
+            new Animais  {AnimalID=15, Nome = "Bernardo", Especie ="cão", Raca="São Bernardo", Peso=67, DonosFK=15},
+            new Animais  {AnimalID=16, Nome = "Miau", Especie ="gato", Raca="siamês", Peso=2, DonosFK=16},
+            new Animais  {AnimalID=17, Nome = "Tareco", Especie ="gato", Raca="siamês", Peso=1, DonosFK=17},
+            new Animais  {AnimalID=18, Nome = "Fofo", Especie ="gato", Raca="persa", Peso=10, DonosFK=17},
+            new Animais  {AnimalID=19, Nome = "Pantufa", Especie ="gato", Raca="persa", Peso=1, DonosFK=18},
+            new Animais  {AnimalID=20, Nome = "Vadio", Especie ="gato", Raca="rafeiro", Peso=2, DonosFK=19},
+            new Animais  {AnimalID=21, Nome = "Saltador", Especie ="Cavalo", Raca="Lusitana", Peso=780, DonosFK=20},
+            new Animais  {AnimalID=22, Nome = "Crina Branca", Especie ="Cavalo", Raca="Lusitana", Peso=900, DonosFK=13},
+            new Animais  {AnimalID=23, Nome = "Brincalhão", Especie ="Cavalo", Raca="Lusitana", Peso=458, DonosFK=12},
+            new Animais  {AnimalID=24, Nome = "Malhada", Especie ="Vaca", Raca="Charolesa", Peso=452, DonosFK=13},
+            new Animais  {AnimalID=25, Nome = "Coxa", Especie ="Vaca", Raca="Charolesa", Peso=562, DonosFK=13},
+            new Animais  {AnimalID=26, Nome = "Tansa", Especie ="Vaca", Raca="Charolesa", Peso=284, DonosFK=14},
+            new Animais  {AnimalID=27, Nome = "Salta Pocinha", Especie ="Cavalo", Raca="Lusitana", Peso=793, DonosFK=4}
 
-};
+         };
 
-         animais.ForEach(aa => context.Animais.AddOrUpdate(a => a.Nome, aa));
-         context.SaveChanges();
-
-
-         // ############################################################################################
-         // adiciona VETERINARIOS
-         var veterinarios = new List<Veterinarios> {
-   new Veterinarios  {VeterinarioID=1, Nome = "Maria Pinto", NumCedulaProf ="vet-34589" },
-   new Veterinarios  {VeterinarioID=2, Nome = "Luís Santos", NumCedulaProf ="vet-34590" },
-   new Veterinarios  {VeterinarioID=3, Nome = "João  Pinto", NumCedulaProf ="vet-56732" },
-   new Veterinarios  {VeterinarioID=4, Nome = "Paula Fernandes", NumCedulaProf ="vet-64327" }
-};
-
-         veterinarios.ForEach(vv => context.Veterinarios.AddOrUpdate(v => v.Nome, vv));
-         context.SaveChanges();
+            animais.ForEach(aa => context.Animais.AddOrUpdate(a => a.Nome, aa));
+            context.SaveChanges();
 
 
-         // ############################################################################################
-         // adiciona CONSULTAS
-         var consultas = new List<Consultas> {
+            // ############################################################################################
+            // adiciona VETERINARIOS
+            var veterinarios = new List<Veterinarios> {
+            new Veterinarios  {VeterinarioID=1, Nome = "Maria Pinto", NumCedulaProf ="vet-34589" },
+            new Veterinarios  {VeterinarioID=2, Nome = "Luís Santos", NumCedulaProf ="vet-34590" },
+            new Veterinarios  {VeterinarioID=3, Nome = "João  Pinto", NumCedulaProf ="vet-56732" },
+            new Veterinarios  {VeterinarioID=4, Nome = "Paula Fernandes", NumCedulaProf ="vet-64327" }
+         };
+
+            veterinarios.ForEach(vv => context.Veterinarios.AddOrUpdate(v => v.Nome, vv));
+            context.SaveChanges();
+
+
+            // ############################################################################################
+            // adiciona CONSULTAS
+            var consultas = new List<Consultas> {
    new Consultas  {ConsultaID = 1, DataConsulta =  new DateTime(2015,2,8), VeterinarioFK = 1, AnimalFK = 2 },
    new Consultas  {ConsultaID = 2, DataConsulta =  new DateTime(2015,5,8), VeterinarioFK = 1, AnimalFK = 19 },
    new Consultas  {ConsultaID = 3, DataConsulta =  new DateTime(2015,6,8), VeterinarioFK = 1, AnimalFK = 13 },
@@ -204,13 +209,14 @@ namespace Vets.Migrations {
    new Consultas  {ConsultaID = 100, DataConsulta =  new DateTime(2016,10,8), VeterinarioFK = 4, AnimalFK = 11 }
 };
 
-         consultas.ForEach(cc => context.Consultas.Add(cc));
-         context.SaveChanges();
+            consultas.ForEach(cc => context.Consultas.Add(cc));
+            context.SaveChanges();
 
 
 
 
 
-      }
-   }
+
+        }
+    }
 }
