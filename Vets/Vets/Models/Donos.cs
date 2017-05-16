@@ -31,10 +31,10 @@ namespace ClinicaVeterinaria.Models
            ErrorMessage = "No '{0}' só pode usar letras. Cada palavra começa com uma letra maiúscula.")]
         public string Nome { set; get; }
 
-        [Required]
+        [Required(ErrorMessage ="Não se esqueça de preencher o nº do NIF")]
         [StringLength(9)]
         [RegularExpression("[0-9]{9}",
-           ErrorMessage = "o {0} tem 9 algarismos")]
+           ErrorMessage = "0 {0} Só aceita 9 algarismos")]
         public string NIF { get; set; }
 
         // especificar que um DONO tem muitos ANIMAIS

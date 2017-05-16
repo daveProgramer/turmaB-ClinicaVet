@@ -49,6 +49,20 @@ namespace ClinicaVeterinaria.Controllers
         public ActionResult Create([Bind(Include = "Nome,NIF")] Donos dono)
         {
             // determinar o ID a fornecer ao novo dono
+            //criar a var. que recebe o novo valor
+            int novoID = 0;
+
+            //determinar o novo ID
+            novoID = (from d in db.Donos
+                      orderby d.DonoID descending
+                      select d.DonoID).FirstOrDefault() + 1;
+
+            novoID = db.Donos.Max(d=>d.DonoID) + 1;
+            //Select max(d.DonoID)
+            //from donos d
+
+            //atribuir o 'novoID' ao objecto 'dono'
+            dono.DonoID = novoID;
 
             if (ModelState.IsValid)
             {
