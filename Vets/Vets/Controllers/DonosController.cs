@@ -51,24 +51,58 @@ namespace ClinicaVeterinaria.Controllers
             // determinar o ID a fornecer ao novo dono
             //criar a var. que recebe o novo valor
             int novoID = 0;
-
-            //determinar o novo ID
-            novoID = (from d in db.Donos
-                      orderby d.DonoID descending
-                      select d.DonoID).FirstOrDefault() + 1;
-
-            novoID = db.Donos.Max(d=>d.DonoID) + 1;
-            //Select max(d.DonoID)
-            //from donos d
-
-            //atribuir o 'novoID' ao objecto 'dono'
-            dono.DonoID = novoID;
-
-            if (ModelState.IsValid)
+            try
             {
-                db.Donos.Add(dono);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //determinar o novo ID
+                /*novoID = (from d in db.Donos
+                          orderby d.DonoID descending
+                          select d.DonoID).FirstOrDefault() + 1;*/
+                //novoID = db.Donos.Max(d => d.DonoID) + 1;
+
+                //por isso atribuir manualmente o valor do 'novoID'
+                novoID = 1;
+
+                //Select max(d.DonoID)
+                //from donos d
+
+                //atribuir o 'novoID' ao objecto 'dono'
+                dono.DonoID = novoID;
+            }
+            catch (System.Exception)
+            {
+                //tabela 'Donos' está vazia
+                //não sendo possível devolver MAX de uma tabela
+
+            }
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Donos.Add(dono);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+
+            }
+            catch (System.Exception)
+            {
+                /*não guarda alterações
+                 precisa no mínimo
+                 notificar o user que o processo falhou
+                 */
+                ModelState.AddModelError("", "Ocorreu um erro na Adição do novo Dono.");
+                /*notificar o admin/programador que ocorreu um erro
+                 fazer: 1º enviar email ao programador da ocorrência de um erro
+                 2º ter uma tabela, na BD, onde serão reportados os erros:
+                 -Data
+                 -Método
+                 Controller
+                 -Detalhes do erro
+                 */
+                 
+
+
             }
 
             return View(dono);
