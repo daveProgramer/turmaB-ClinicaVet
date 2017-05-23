@@ -215,7 +215,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Veterinarios.cs" />
-    <Compile Include="Models\VetsDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -233,7 +232,6 @@
     <Content Include="Views\Donos\Edit.cshtml" />
     <Content Include="Views\Donos\Index.cshtml" />
     <Content Include="Views\Donos\Create.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Details.cshtml" />

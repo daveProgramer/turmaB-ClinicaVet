@@ -1,6 +1,6 @@
 ﻿using Owin;
 
-namespace IdentitySample
+namespace ClinicaVeterinaria
 {
     public partial class Startup
     {

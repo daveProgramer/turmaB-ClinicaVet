@@ -7,14 +7,14 @@ namespace ClinicaVeterinaria.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ClinicaVeterinaria.Models.VetsDB>
+    internal sealed class Configuration : DbMigrationsConfiguration<ClinicaVeterinaria.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ClinicaVeterinaria.Models.VetsDB context)
+        protected override void Seed(ClinicaVeterinaria.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
